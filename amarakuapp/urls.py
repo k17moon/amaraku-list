@@ -14,20 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path, include
-from .views import signupfunc, loginfunc, logoutfunc, AmarakuList
-    # , TodoDetail, TodoCreate, TodoDelete, TodoUpdate, signupfunc, loginfunc, logoutfunc
+from .views import signupfunc, loginfunc, logoutfunc, AmarakuList, Create, Detail, Delete, Update
+
 
 urlpatterns = [
     path('list/', AmarakuList.as_view(), name='list'),
+    path('create/', Create.as_view(), name='create'),
+    path('detail/<int:pk>/', Detail.as_view(), name='detail'),
+    path('delete/<int:pk>/', Delete.as_view(), name='delete'),
+    path('update/<int:pk>/', Update.as_view(), name='update'),
+
     # ログイン機能を追加
     path('signup/', signupfunc, name='signup'),
     path('login/', loginfunc, name='login'),
     path('logout/', logoutfunc, name='logout'),
-
-    # path('detail/<int:pk>/', TodoDetail.as_view(), name='detail'),
-    # path('create/', TodoCreate.as_view(), name='create'),
-    # path('delete/<int:pk>/', TodoDelete.as_view(), name='delete'),
-    # path('update/<int:pk>/', TodoUpdate.as_view(), name='update'),
-
 
 ]

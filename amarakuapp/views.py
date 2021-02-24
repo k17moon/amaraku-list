@@ -5,13 +5,36 @@ from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
+from django.contrib.auth.models import User
 
 
 # Create your views here.
 
-class TodoList(ListView):
+class AmarakuList(ListView):
     template_name = 'list.html'
     model = AmarakuModel
+
+class Create(CreateView):
+    template_name = 'create.html'
+    model = AmarakuModel
+    fields = ('title', 'memo', 'url_ama', 'url_raku')
+    success_url = reverse_lazy('list')
+
+class Detail(DetailView):
+    template_name = 'detail.html'
+    model = AmarakuModel
+
+class Delete(DeleteView):
+    template_name = 'delete.html'
+    model = AmarakuModel
+    success_url = reverse_lazy('list')
+
+class Update(UpdateView):
+    template_name = 'update.html'
+    model = AmarakuModel
+    fields = ('title', 'memo', 'url_ama', 'url_raku')
+    success_url = reverse_lazy('list')
+
 
 # サインイン機能
 def signupfunc(request):

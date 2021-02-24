@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'amarakuapp.apps.Amarakuapp.Config'
+    'amarakuapp.apps.AmarakuappConfig'
 ]
 
 MIDDLEWARE = [
@@ -120,3 +120,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STATICFILES_DIRS = [str(BASE_DIR / 'static')]
+
+LOGIN_URL = 'login'

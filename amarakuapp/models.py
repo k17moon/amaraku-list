@@ -23,19 +23,24 @@ class AmarakuModel(models.Model):
     register_date = models.DateField(null=True, blank=True, default=timezone.now)
     last_date = models.DateField(null=True, blank=True, default=timezone.now)
 
+    def __str__(self):
+        return self.title
+
 def get_price_ama(page_url):
-    res = requests.get(page_url)
-    soup = bs4.BeautifulSoup(res.text, features="lxml")
-    selected_html = soup.select('.a-span12 span.a-color-price')
+#    res = requests.get(page_url)
+#    soup = bs4.BeautifulSoup(res.text, features="lxml")
+#    selected_html = soup.select('.a-span12 span.a-color-price')
+#
+#    if not selected_html:
+#        selected_html = soup.select('.a-color-base span.a-color-price')
 
-    if not selected_html:
-        selected_html = soup.select('.a-color-base span.a-color-price')
-
-    pattern = r'\d*,?\d*,?\d*\d'
-    regex = re.compile(pattern)
-    matches = re.findall(regex, selected_html[0].text)
-    price = matches[0].replace(',', '')
+#    pattern = r'\d*,?\d*,?\d*\d'
+#    regex = re.compile(pattern)
+#    matches = re.findall(regex, selected_html[0].text)
+#    price = matches[0].replace(',', '')
+    price = 0
     return int(price)
 
 def get_price_raku(page_url):
-    return price
+    price = 0
+    return int(price)
