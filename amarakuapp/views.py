@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, DeleteView, UpdateView
-# from .models import AmarakuModel
+from .models import AmarakuModel
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -9,6 +9,11 @@ from django.db import IntegrityError
 
 # Create your views here.
 
+class TodoList(ListView):
+    template_name = 'list.html'
+    model = AmarakuModel
+
+# サインイン機能
 def signupfunc(request):
     if request.method == "POST":
         username = request.POST['username']
