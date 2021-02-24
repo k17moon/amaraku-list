@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
-
+import requests
+import re
+from bs4 import BeautifulSoup
 
 # Create your models here.
 
@@ -20,3 +22,20 @@ class AmarakuModel(models.Model):
     #日付 デフォルトで今日の日付
     register_date = models.DateField(null=True, blank=True, default=timezone.now)
     last_date = models.DateField(null=True, blank=True, default=timezone.now)
+
+def get_price_ama(page_url):
+    res = requests.get(page_url)
+    soup = bs4.BeautifulSoup(res.text, features="lxml")
+    selected_html = soup.select('.a-span12 span.a-color-price')
+
+    if not selected_html:
+        selected_html = soup.select('.a-color-base span.a-color-price')
+
+    pattern = r'\d*,?\d*,?\d*\d'
+    regex = re.compile(pattern)
+    matches = re.findall(regex, selected_html[0].text)
+    price = matches[0].replace(',', '')
+    return int(price)
+
+def get_price_raku(page_url):
+    return price
