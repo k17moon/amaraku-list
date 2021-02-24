@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'amarakuapp.apps.AmarakuappConfig'
+    'tubesearchapp.apps.TubesearchappConfig'
 ]
 
 MIDDLEWARE = [
@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'amaraku.urls'
+ROOT_URLCONF = 'tubesearch.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'amaraku.wsgi.application'
+WSGI_APPLICATION = 'tubesearch.wsgi.application'
 
 
 # Database
