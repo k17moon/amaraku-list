@@ -12,8 +12,7 @@ python manage.py startapp [app名]
 
 pip install
 	django
-	requests
-	beautifulsoup4
+	google-api-python-client
 
 
 
