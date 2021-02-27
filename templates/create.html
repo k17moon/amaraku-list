@@ -6,8 +6,7 @@
 <form method="POST">{% csrf_token %}
     <p>タイトル：<input type="text" name="title"></p>
     <p>メモ：<input type="text" name="memo"></p>
-    <p>AmazonのURL：<input type="url" name="url_ama"></p>
-
+    <p>検索キーワード：<input type="text" name="keyword"></p>
     <input type="submit" value="create">
 </form>
 {% endblock content %}

@@ -3,7 +3,7 @@
 {% block header %}
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-4">価格比較リスト</h1>
+    <h1 class="display-4">Youtube検索リスト</h1>
     <p class="lead">一覧ページ</p>
   </div>
 </div>
@@ -17,15 +17,14 @@
 
     {% for object in object_list %}
         <p>{{ object.title }}</p>
-        <p>Amazonでの価格：{{ object.price_ama }}||
-           楽天での価格：{{ object.price_raku }}</p>
+        <p>検索キーワード：{{ object.keyword }}</p>
         <p>最終更新：{{ object.last_date | date:"o/m/d" }}</p>
 
         <a href="{% url 'update' object.pk %}" class="btn btn-info" tabindex="-1" role="button" aria-disabled="true">編集</a>
         <a href="{% url 'delete' object.pk %}" class="btn btn-success" tabindex="-1" role="button" aria-disabled="true">削除</a>
         <a href="{% url 'detail' object.pk %}" class="btn btn-dark" tabindex="-1" role="button" aria-disabled="true">詳細</a>
     {% endfor %}
-    <a href="{% url 'logout' %}">ログアウト</a>
+    <p><a href="{% url 'logout' %}">ログアウト</a></p>
 </div>
 
 {% endblock content %}

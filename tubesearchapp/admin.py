@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import AmarakuModel
+from .models import TubesearchModel
 
 # Register your models here.
 
-admin.site.register(AmarakuModel)
+admin.site.register(TubesearchModel)

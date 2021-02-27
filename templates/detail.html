@@ -10,13 +10,9 @@
 <div class="alert alert-success" role="alert">
   メモ：{{ object.memo }}
 </div>
-    <p>Amazon商品のURL：{{ object.url_ama }}</p>
-    <p>Amazonの価格：{{ object.price_ama }}</p>
-    <p>Amazonの最安値：{{ object.lowest_ama }}</p>
-
-    <p>楽天商品のURL：{{ object.url_raku }}</p>
-    <p>楽天商品の価格：{{ object.price_raku }}</p>
-    <p>楽天商品の最安値：{{ object.lowest_raku }}</p>
+    <p>検索キーワード：{{ object.keyword }}</p>
+    <p>検索結果</p>
+    {% object.get_search() %}
 
     <p>登録日：{{ object.regster_date }}</p>
     <p>最終更新日：{{ object.last_date }}</p>
