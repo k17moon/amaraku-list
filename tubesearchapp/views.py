@@ -1,11 +1,29 @@
-from django.shortcuts import render, redirect
-from django.views.generic import DetailView, CreateView, DeleteView, UpdateView
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import CreateView, DeleteView, UpdateView
 from .models import TubesearchModel
 from django.urls import reverse_lazy
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.contrib.auth.models import User
+from django.conf import settings
+from apiclient import discovery
+import json
+
+
+# youtube検索の関数
+def get_search(keyword):
+    # keyword = self.keyword
+    youtube = discovery.build('youtube', 'v3', developerKey=settings.YOUTUBE_DATA_V3_API_KEY)
+    youtube_query = youtube.search().list(q=keyword, part='id,snippet', maxResults=3)
+    youtube_res = youtube_query.execute()
+    return youtube_res.get('items', [])
+
+    # 以下のように取り出せる
+    #    items = get_search(keyword)
+    #    for item in items:
+    #        print(item['snippet']['title'])
+    #        print("https://www.youtube.com/watch?v="+item['id']['videoId'])
 
 
 # Create your views here.
@@ -13,8 +31,22 @@ from django.contrib.auth.models import User
 @login_required
 def TubesearchListfunc(request):
     object_list = TubesearchModel.objects.all()
-
     return render(request, 'list.html', { 'object_list': object_list })
+
+def Detailfunc(request, pk):
+    object = get_object_or_404(TubesearchModel, pk=pk)
+
+    items = get_search(object.keyword)
+    # print(type(items))
+    videos = []
+    for item in items:
+        video = {
+            'title': item['snippet']['title'],
+            'url': f"https://www.youtube.com/watch?v={item['id']['videoId']}"
+        }
+        videos.append(video)
+
+    return render(request, 'detail.html', {'object': object, 'videos': videos})
 
 class Create(CreateView):
     template_name = 'create.html'
@@ -23,9 +55,6 @@ class Create(CreateView):
     # success_url = reverse_lazy('list')
     success_url = reverse_lazy('create')
 
-class Detail(DetailView):
-    template_name = 'detail.html'
-    model = TubesearchModel
 
 class Delete(DeleteView):
     template_name = 'delete.html'

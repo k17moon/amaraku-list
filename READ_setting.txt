@@ -5,6 +5,7 @@ pip install
 	django
 	requests
 	beautifulsoup4
+	jsonfield
 
 Dockerを使用しない場合：
 django-admin startproject [PJ名] .
